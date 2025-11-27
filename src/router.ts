@@ -11,7 +11,7 @@ const routes = [
     {
         path: '/completed',
         name: 'Completed',
-        componenet: Completed,
+        component: Completed,
     },
 ];
 
