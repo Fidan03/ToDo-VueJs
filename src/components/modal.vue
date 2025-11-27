@@ -1,19 +1,19 @@
 <script>
-import {store} from '../store/index.js'
+import {store, updateTodo} from '../store/index.js'
     export default {
         name: 'Modal',
     props: {
         isVisible: {
             type: Boolean,
             default: false
-        },
-        editingtext: {
-            type: String
         }
     },
     methods: {
         closeModal() {
             this.$emit('close');
+        },
+        save() {
+            this.$emit('save', this.store.editingText);
         }
     },
     data() {
@@ -39,7 +39,7 @@ import {store} from '../store/index.js'
 
             <div class="buttons">
                 <button type="button" @click="closeModal" class="cancel">CANCEL</button>
-                <button type="submit" class="modify" >MODIFY</button>
+                <button type="submit" class="modify" @click="updateTodo(store.editingIndex, store.editingText)">MODIFY</button>
             </div>
         </div>
     </div>
@@ -102,6 +102,7 @@ import {store} from '../store/index.js'
                 border-radius: 10px;
                 border: 1px solid darkolivegreen;
                 font-size: 15px;
+                cursor: pointer;
             }
 
             .cancel {

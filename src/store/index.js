@@ -18,12 +18,9 @@ export const addItem = () => {
 }
 
 export const deleteItem = (index) => {
+
+    store.todoList.splice( index, 1);
     
-    if (index !== -1) {
-        store.todoList.splice( index, 1);
-    } else {
-        alert('Item not exist!');
-    }
 }
 
 
@@ -32,6 +29,6 @@ export const modalValue = (index) => {
     store.editingText = store.todoList[index];
 }
 
-export const saveChanges = () => {
-    store.editingText = 
+export const updateTodo = (index, newText) => {
+    store.todoList[index] = newText;
 }

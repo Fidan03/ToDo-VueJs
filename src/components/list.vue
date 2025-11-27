@@ -15,7 +15,7 @@
       </li>
     </ul>
 
-    <Modal :isVisible="showModal" @close="showModal = false"/>
+    <Modal :isVisible="showModal" @close="showModal = false" @save="saveChanges"/>
 
   </div>
 </template>
@@ -24,7 +24,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import {store, deleteItem, modalValue} from '../store/index.js'
+import {store, deleteItem, modalValue, updateTodo} from '../store/index.js'
 import Modal from './modal.vue';
 
 export default defineComponent({
@@ -40,7 +40,11 @@ export default defineComponent({
   },
   methods: {
     deleteItem,
-    modalValue
+    modalValue,
+    saveChanges(newText) {
+      store.updateTodo(store.editingIndex, newText);
+      this.showModal = false;
+    }
   }
 });
 </script>
