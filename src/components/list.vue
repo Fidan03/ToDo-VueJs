@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(item, index) in store.todoList" :key="index">
         <label class="custom-checkbox">
-          <input type="checkbox" />
+          <input type="checkbox" @change="deleteItem(index)"/>
           <span class="checkmark"></span>
           <span class="todo-text" >{{item}}</span>
         </label>
