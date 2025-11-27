@@ -1,17 +1,15 @@
 <script>
 export default {
-    name: 'Complited'
+    name: 'Completed'
 }
 </script>
 
 
 
 <template>
-    <h1>dkjekdej'ksaldsa</h1>
+    <div>
+        <h1>Finally</h1>
+    </div>
 </template>
 
 
-
-<style lang="scss" scoped>
-
-</style>

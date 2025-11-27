@@ -1,7 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
 import "primeicons/primeicons.css";
-import router from './pages/Routes.vue'
+import router from './router.ts';
 
 
 const app = createApp(App);

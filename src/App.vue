@@ -1,169 +1,43 @@
-<script>
-import List from './components/list.vue';
-import {store, addItem} from './store/index.js'
-
-
-export default {
-  name: 'Home',
-  components: {
-    List
-  },
-  data () {
-    return {
-      store
-    }
-  }, 
-  methods: {
-    addItem,
-  }
-}
-
-</script>
-
-
-
 <template>
-  <div class="container">
-    <h1>TODO LIST</h1>
-
-    <div class="inputField">
-
-      <div class="input">
-        <input type="text" placeholder="Search note ..." v-model="store.inputValue"></input>
-        <p>
-          <i class="pi pi-search"></i>
-        </p>
-      </div>
-
-      <div class="buttons">
-        <div class="filterBtn">
-          <p>ALL</p>
-        </div>
-
-        <button>
-          <i class="pi pi-moon"></i>
-        </button>
-      </div>
-
-    </div>
-
-    <List/>
-
-    <button class="add" @click="addItem">+</button>
-
+  <div id="app">
+    <nav>
+      <router-link to="/">Home</router-link>
+      <router-link to="/completed">Completed</router-link>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
+<script>
+
+export default {
+  name: 'App',
+
+};
+</script>
 
 
-
-<style scoped lang="scss">
-.container {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  width: 750px;
-  margin-left: auto;
-  margin-right: auto;
-
-  h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: darkolivegreen;
-  }
-
-  .inputField {
-    display: flex;
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 30px;
-
-    .input {
-      display: flex;
-      align-items: center;
-      border: 2px solid darkolivegreen;
-      border-radius: 10px;
-      padding: 0 15px;
-      flex: 1;
-
-      input {
-        flex: 1;
-        height: 40px;
-        border: none;
-        outline: none;
-        font-size: 15px;
-      }
-
-      input::placeholder {
-        color: rgba(211, 210, 210, 0.95);
-      }
-
-      p i {
-        color: darkolivegreen;
-        cursor: pointer;
-      }
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-
-      .filterBtn {
-        display: flex;
-        align-items: center;
-        background-color: darkolivegreen;
-        color: white;
-        padding: 0 10px;
-        border-radius: 10px;
-        gap: 10px;
-        height: 54px;
-        cursor: pointer;
-      }
-
-      button {
-        background-color: darkolivegreen;
-        border: none;
-        color: white;
-        height: 54px;
-        width: 54px;
-        border-radius: 10px;
-        font-size: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-  }
-
-
-
-  .add {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 30px;
-    color: white;
-    background-color: darkolivegreen;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    transition: transform 0.2s, background-color 0.2s;
-
-    &:hover {
-      transform: scale(1.1);
-      background-color: #556b2f;
-    }
-  }
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 
+nav {
+  margin-bottom: 20px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  padding: 0 10px;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
 </style>
