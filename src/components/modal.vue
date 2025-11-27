@@ -12,9 +12,7 @@ import {store, updateTodo} from '../store/index.js'
         closeModal() {
             this.$emit('close');
         },
-        save() {
-            this.$emit('save', this.store.editingText);
-        }
+        updateTodo
     },
     data() {
         return {
@@ -39,7 +37,7 @@ import {store, updateTodo} from '../store/index.js'
 
             <div class="buttons">
                 <button type="button" @click="closeModal" class="cancel">CANCEL</button>
-                <button type="submit" class="modify" @click="updateTodo(store.editingIndex, store.editingText)">MODIFY</button>
+                <button type="submit" class="modify" @click="updateTodo(); closeModal()">MODIFY</button>
             </div>
         </div>
     </div>

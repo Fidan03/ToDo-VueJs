@@ -29,6 +29,8 @@ export const modalValue = (index) => {
     store.editingText = store.todoList[index];
 }
 
-export const updateTodo = (index, newText) => {
-    store.todoList[index] = newText;
+export const updateTodo = () => {
+    store.todoList[store.editingIndex] = store.editingText;
 }
+
+

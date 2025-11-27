@@ -41,6 +41,7 @@ export default defineComponent({
   methods: {
     deleteItem,
     modalValue,
+    updateTodo,
     saveChanges(newText) {
       store.updateTodo(store.editingIndex, newText);
       this.showModal = false;
