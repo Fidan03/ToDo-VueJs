@@ -1,7 +1,7 @@
 <template>
   <div class="todos">
     <ul>
-      <li v-for="(item, index) in store.todoList" :key="index">
+      <li v-for="(item, index) in this.store.todoList" :key="index">
         <label class="custom-checkbox">
           <input type="checkbox" @change="deleteItem(index)"/>
           <span class="checkmark"></span>
@@ -24,7 +24,6 @@
 
 <script>
 import { defineComponent } from 'vue';
-import {store, deleteItem, modalValue, updateTodo} from '../store/index.js'
 import Modal from './modal.vue';
 
 export default defineComponent({
@@ -34,7 +33,6 @@ export default defineComponent({
   },
   data() {
     return {
-      store,
       showModal: false
     }
   },
@@ -43,7 +41,7 @@ export default defineComponent({
     modalValue,
     updateTodo,
     saveChanges(newText) {
-      store.updateTodo(store.editingIndex, newText);
+      store.state.updateTodo(this.store.editingIndex, newText);
       this.showModal = false;
     }
   }

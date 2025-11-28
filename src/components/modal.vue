@@ -1,5 +1,5 @@
 <script>
-import {store, updateTodo} from '../store/index.js'
+
     export default {
         name: 'Modal',
     props: {
@@ -13,11 +13,6 @@ import {store, updateTodo} from '../store/index.js'
             this.$emit('close');
         },
         updateTodo
-    },
-    data() {
-        return {
-            store
-        }
     }
 }
 
@@ -32,7 +27,7 @@ import {store, updateTodo} from '../store/index.js'
 
             <div class="header">
                 <h1>EDIT NOTE</h1>
-                <input type="text" v-model="store.editingText">
+                <input type="text" v-model="this.store.state.editingText">
             </div>
 
             <div class="buttons">

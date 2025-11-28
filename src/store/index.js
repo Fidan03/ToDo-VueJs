@@ -1,36 +1,31 @@
-import {reactive} from 'vue'
+import {createStore} from 'vuex';
 
-export const store = reactive ({
-    inputValue: '',
-    todoList: [],
-    editingText: '',
-    editingIndex: null
-})
+export default const store = createStore ({
+    state() {
+        return {
+            inputValue: '',
+            todoList: [],
+            editingText: '',
+            editingIndex: null
+        };
+    },
 
-export const addItem = () => {
-    // console.log("addItem");
-    
-
-    if (store.inputValue.trim() !== '') {
-        store.todoList.push(store.inputValue.trim());
-        store.inputValue = '';
+    mutations: {
+        addItem(state) {
+            if (state.inputValue.trim() !== '') {
+                state.todoList.push(state.inputValue.trim());
+                state.inputValue = '';
+            }
+        },
+        deleteItem(state) {
+            state.todoList.splice( index, 1);
+        },
+        modalValue(state) {
+            state.editingIndex = index;
+            state.editingText = state.todoList[index];
+        },
+        updateTodo(state) {
+            state.todoList[state.editingIndex] = state.editingText;
+        }
     }
-}
-
-export const deleteItem = (index) => {
-
-    store.todoList.splice( index, 1);
-    
-}
-
-
-export const modalValue = (index) => {
-    store.editingIndex = index;
-    store.editingText = store.todoList[index];
-}
-
-export const updateTodo = () => {
-    store.todoList[store.editingIndex] = store.editingText;
-}
-
-
+})
