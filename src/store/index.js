@@ -1,6 +1,6 @@
 import {createStore} from 'vuex';
 
-export default const store = createStore ({
+const store = createStore ({
     state() {
         return {
             inputValue: '',
@@ -10,22 +10,42 @@ export default const store = createStore ({
         };
     },
 
+    getters: {
+        getInputValue: (state) => state.inputValue
+    },
+
     mutations: {
-        addItem(state) {
+
+        addItem:(state) => {
+            console.log(state);
+            
             if (state.inputValue.trim() !== '') {
                 state.todoList.push(state.inputValue.trim());
                 state.inputValue = '';
             }
         },
-        deleteItem(state) {
+
+        inputChange (state, payload) {
+            console.log('inputChange', payload);
+            
+            state.inputValue = payload;
+        },
+
+
+        deleteItem(state, index) {
             state.todoList.splice( index, 1);
         },
-        modalValue(state) {
+
+        modalValue(state, index) {
             state.editingIndex = index;
             state.editingText = state.todoList[index];
         },
+
         updateTodo(state) {
             state.todoList[state.editingIndex] = state.editingText;
         }
+
     }
 })
+
+export default store

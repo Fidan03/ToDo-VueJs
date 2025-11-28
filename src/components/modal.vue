@@ -1,4 +1,5 @@
 <script>
+// import store from '../store/index.js'
 
     export default {
         name: 'Modal',
@@ -12,7 +13,7 @@
         closeModal() {
             this.$emit('close');
         },
-        updateTodo
+        // updateTodo
     }
 }
 
@@ -32,7 +33,7 @@
 
             <div class="buttons">
                 <button type="button" @click="closeModal" class="cancel">CANCEL</button>
-                <button type="submit" class="modify" @click="updateTodo(); closeModal()">MODIFY</button>
+                <!-- <button type="submit" class="modify" @click="updateTodo(); closeModal()">MODIFY</button> -->
             </div>
         </div>
     </div>

@@ -1,16 +1,16 @@
 <template>
   <div class="todos">
     <ul>
-      <li v-for="(item, index) in this.store.todoList" :key="index">
+      <li v-for="(item, index) in this.$store.state.todoList" :key="index">
         <label class="custom-checkbox">
-          <input type="checkbox" @change="deleteItem(index)"/>
+          <!-- <input type="checkbox" @change="deleteItem(index)"/> -->
           <span class="checkmark"></span>
           <span class="todo-text" >{{item}}</span>
         </label>
 
         <span class="icons">
-          <i class="pi pi-pencil" @click="showModal = true; modalValue(index)"></i>
-          <i class="pi pi-trash" @click="deleteItem(index)"></i>
+          <!-- <i class="pi pi-pencil" @click="showModal = true; modalValue(index)"></i> -->
+          <!-- <i class="pi pi-trash" @click="deleteItem(index)"></i> -->
         </span>
       </li>
     </ul>
@@ -37,9 +37,9 @@ export default defineComponent({
     }
   },
   methods: {
-    deleteItem,
-    modalValue,
-    updateTodo,
+    // deleteItem,
+    // modalValue,
+    // updateTodo,
     saveChanges(newText) {
       store.state.updateTodo(this.store.editingIndex, newText);
       this.showModal = false;
