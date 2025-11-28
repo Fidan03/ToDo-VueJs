@@ -3,14 +3,14 @@
     <ul>
       <li v-for="(item, index) in this.$store.state.todoList" :key="index">
         <label class="custom-checkbox">
-          <!-- <input type="checkbox" @change="deleteItem(index)"/> -->
+          <input type="checkbox" @change="this.$store.commit('deleteItem', index)"/>
           <span class="checkmark"></span>
           <span class="todo-text" >{{item}}</span>
         </label>
 
         <span class="icons">
-          <!-- <i class="pi pi-pencil" @click="showModal = true; modalValue(index)"></i> -->
-          <!-- <i class="pi pi-trash" @click="deleteItem(index)"></i> -->
+          <i class="pi pi-pencil" @click="showModal = true; this.$store.commit('modalValue', index)"></i>
+          <i class="pi pi-trash" @click="this.$store.commit('deleteItem', index)"></i>
         </span>
       </li>
     </ul>
@@ -25,6 +25,7 @@
 <script>
 import { defineComponent } from 'vue';
 import Modal from './modal.vue';
+import store from '../store/index.js'
 
 export default defineComponent({
   name: 'List',
@@ -33,15 +34,13 @@ export default defineComponent({
   },
   data() {
     return {
-      showModal: false
+      showModal: false,
+      store
     }
   },
   methods: {
-    // deleteItem,
-    // modalValue,
-    // updateTodo,
     saveChanges(newText) {
-      store.state.updateTodo(this.store.editingIndex, newText);
+      this.$store.state.updateTodo(this.$store.state.editingIndex, newText);
       this.showModal = false;
     }
   }

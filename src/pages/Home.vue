@@ -10,6 +10,7 @@ export default {
   components: {
     List
   },
+  
   data () {
     return {
       store
@@ -24,6 +25,7 @@ export default {
         return this.getInputValue;
       }
     },
+
     set(value) {
       this.addItem(value)
     }
@@ -36,10 +38,12 @@ export default {
     addItem() {
       this.$store.commit('addItem')
     },
+
     handleOnChange (e) {
       
       this.$store.state.inputValue = e.target.value;
       console.log(this.$store.state.inputValue);
+
       // this.$store.commit('inputChange', e.target.value)
     }
   }

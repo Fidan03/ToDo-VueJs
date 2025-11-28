@@ -17,7 +17,7 @@ const store = createStore ({
     mutations: {
 
         addItem:(state) => {
-            console.log(state);
+            // console.log(state);
             
             if (state.inputValue.trim() !== '') {
                 state.todoList.push(state.inputValue.trim());
@@ -26,19 +26,19 @@ const store = createStore ({
         },
 
         inputChange (state, payload) {
-            console.log('inputChange', payload);
+            // console.log('inputChange', payload);
             
             state.inputValue = payload;
         },
 
 
-        deleteItem(state, index) {
-            state.todoList.splice( index, 1);
+        deleteItem(state, payload) {
+            state.todoList.splice( payload, 1);
         },
 
-        modalValue(state, index) {
-            state.editingIndex = index;
-            state.editingText = state.todoList[index];
+        modalValue(state, payload) {
+            state.editingIndex = payload;
+            state.editingText = state.todoList[payload];
         },
 
         updateTodo(state) {
