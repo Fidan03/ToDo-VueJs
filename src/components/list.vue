@@ -1,17 +1,19 @@
 <template>
   <div class="todos">
     <ul>
-      <li v-for="(item, index) in this.$store.state.todoList" :key="index">
+
+      <li v-for="todo in todoList" :key="todo.id">
         <label class="custom-checkbox">
-          <input type="checkbox" @change="this.$store.commit('deleteItem', index)"/>
+          <input type="checkbox"/>
           <span class="checkmark"></span>
-          <span class="todo-text" >{{item}}</span>
+          <span class="todo-text" >{{ todo.text }}</span>
         </label>
 
         <span class="icons">
-          <i class="pi pi-pencil" @click="showModal = true; this.$store.commit('modalValue', index)"></i>
-          <i class="pi pi-trash" @click="this.$store.commit('deleteItem', index)"></i>
+          <i class="pi pi-pencil"></i>
+          <i class="pi pi-trash"></i>
         </span>
+        
       </li>
     </ul>
 
@@ -26,6 +28,7 @@
 import { defineComponent } from 'vue';
 import Modal from './modal.vue';
 import store from '../store/index.js'
+import { mapState } from 'vuex';
 
 export default defineComponent({
   name: 'List',
@@ -43,6 +46,9 @@ export default defineComponent({
       this.$store.state.updateTodo(this.$store.state.editingIndex, newText);
       this.showModal = false;
     }
+  }, 
+  computed: {
+    ...mapState(['todoList'])
   }
 });
 </script>

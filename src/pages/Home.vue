@@ -2,7 +2,8 @@
 import List from '../components/list.vue';
 import store from '../store/index.js'
 
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapState, mapActions } from 'vuex';
+
 
 
 export default {
@@ -13,38 +14,25 @@ export default {
   
   data () {
     return {
-      store
+      newTodoText: ''
     }
   },
 
   computed: {
     ...mapGetters(['getInputValue']),
-    
-    localInputValue: {
-      get() {
-        return this.getInputValue;
-      }
-    },
-
-    set(value) {
-      this.addItem(value)
-    }
+    ...mapState(['todoList']),
   },
 
   methods: {
-    ...mapMutations(['setInputValue']),
+    ...mapActions(['addTodo']),
+
+    handleAddTodo() {
+      if (this.newTodoText.trim()) {
+        this.addTodo({ text: this.newTodoText });
+        this.newTodoText = '';
+      }
 
 
-    addItem() {
-      this.$store.commit('addItem')
-    },
-
-    handleOnChange (e) {
-      
-      this.$store.state.inputValue = e.target.value;
-      // console.log(this.$store.state.inputValue);
-
-      // this.$store.commit('inputChange', e.target.value)
     }
   }
 }
@@ -58,11 +46,11 @@ export default {
     <h1>TODO LIST</h1>
 
     <div class="inputField">
-      <!-- {{ JSON.stringify(store) }} -->
 
 
       <div class="input">
-        <input type="text" placeholder="Search note ..." v-model="localInputValue" @change="(e) => {handleOnChange(e)} "/>
+        <input type="text" placeholder="Search note ..." v-model="newTodoText"/>
+
         <p>
           <i class="pi pi-search"></i>
         </p>
@@ -82,7 +70,7 @@ export default {
 
     <List/>
 
-    <button class="add" @click="addItem()">+</button>
+    <button class="add" @click="handleAddTodo()">+</button>
 
   </div>
 </template>

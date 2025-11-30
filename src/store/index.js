@@ -16,17 +16,13 @@ const store = createStore ({
 
     mutations: {
 
-        addItem:(state) => {
-            // console.log(state);
-            
-            if (state.inputValue.trim() !== '') {
-                state.todoList.push(state.inputValue.trim());
-                state.inputValue = '';
-            }
+        addItem(state, newTodo) {
+
+            state.todoList.push(newTodo);
+
         },
 
         inputChange (state, payload) {
-            // console.log('inputChange', payload);
             
             state.inputValue = payload;
         },
@@ -45,6 +41,18 @@ const store = createStore ({
             state.todoList[state.editingIndex] = state.editingText;
         }
 
+    },
+
+    actions: {
+        addTodo({commit}, todoPayload) {
+            const newTodo = {
+                id: Date.now(),
+                text: todoPayload.text,
+                completed: false,
+            };
+
+            commit('addItem', newTodo);
+        }
     }
 })
 
