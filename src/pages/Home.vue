@@ -42,7 +42,7 @@ export default {
     handleOnChange (e) {
       
       this.$store.state.inputValue = e.target.value;
-      console.log(this.$store.state.inputValue);
+      // console.log(this.$store.state.inputValue);
 
       // this.$store.commit('inputChange', e.target.value)
     }

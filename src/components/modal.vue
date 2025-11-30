@@ -1,5 +1,4 @@
 <script>
-// import store from '../store/index.js'
 
     export default {
         name: 'Modal',
@@ -12,8 +11,7 @@
     methods: {
         closeModal() {
             this.$emit('close');
-        },
-        // updateTodo
+        }
     }
 }
 
@@ -28,12 +26,12 @@
 
             <div class="header">
                 <h1>EDIT NOTE</h1>
-                <input type="text" v-model="this.store.state.editingText">
+                <input type="text" v-model="this.$store.state.editingText">
             </div>
 
             <div class="buttons">
                 <button type="button" @click="closeModal" class="cancel">CANCEL</button>
-                <!-- <button type="submit" class="modify" @click="updateTodo(); closeModal()">MODIFY</button> -->
+                <button type="submit" class="modify" @click="this.$store.commit('updateTodo'); closeModal()">MODIFY</button>
             </div>
         </div>
     </div>
