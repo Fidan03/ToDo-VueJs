@@ -10,10 +10,6 @@ const store = createStore ({
         };
     },
 
-    getters: {
-        getInputValue: (state) => state.inputValue
-    },
-
     mutations: {
 
         addItem(state, newTodo) {
@@ -34,7 +30,7 @@ const store = createStore ({
 
         modalValue(state, payload) {
             state.editingIndex = payload;
-            state.editingText = state.todoList[payload];
+            state.editingText = state.todoList[text][payload];
         },
 
         updateTodo(state) {
