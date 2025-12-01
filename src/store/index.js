@@ -9,6 +9,7 @@ const store = createStore ({
             editingIndex: null
         };
     },
+    
 
     mutations: {
 
@@ -29,6 +30,13 @@ const store = createStore ({
                 todo.text = newText;
             }
 
+        },
+
+        toggleTodoCompletion(state, todoId) {
+            const todo = state.todoList.find(todo => todo.id === todoId);
+            if (todo) {
+                todo.completed != todo.completed;
+            }
         }
 
     },
@@ -50,6 +58,10 @@ const store = createStore ({
 
         editTodo({commit}, payload) {
             commit('updateTodo', payload);
+        },
+
+        complatedTodo ({commit}, todoId) {
+            commit('toggleTodoCompletion', todoId);
         }
     },
 
@@ -59,5 +71,6 @@ const store = createStore ({
         }
     }
 })
+
 
 export default store

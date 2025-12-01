@@ -4,9 +4,9 @@
 
       <li v-for="todo in todoList" :key="todo.id">
         <label class="custom-checkbox">
-          <input type="checkbox"/>
+          <input type="checkbox" :checked="todo.completed" @change="toggleCompletion(todo.id)"/>
           <span class="checkmark"></span>
-          <span class="todo-text" >{{ todo.text }}</span>
+          <span class="todo-text" :class="{completed: todo.completed}">{{ todo.text }}</span>
         </label>
 
         <span class="icons">
@@ -45,7 +45,7 @@ export default defineComponent({
   },
 
   methods: {
-    ...mapActions(['deleteTodo']),
+    ...mapActions(['deleteTodo', 'complatedTodo']),
 
     openEditModal (id) {
       this.selectedTodoId = id;
@@ -55,13 +55,20 @@ export default defineComponent({
     closeEditModal() {
       this.isModalOpen = false;
       this.selectedTodoId = null;
+    },
+
+    toggleCompletion(todoId) {
+      this.complatedTodo(todoId);
     }
+
   },
 
   computed: {
     ...mapState(['todoList'])
   }
 });
+
+
 </script>
 
 
