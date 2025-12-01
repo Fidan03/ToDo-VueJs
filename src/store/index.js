@@ -33,7 +33,7 @@ const store = createStore ({
         toggleTodoCompletion(state, todoId) {
             const todo = state.todoList.find(todo => todo.id === todoId);
             if (todo) {
-                todo.completed != todo.completed;
+                todo.completed = !todo.completed;
 
                 console.log('Todo toggled:', todo);
 
