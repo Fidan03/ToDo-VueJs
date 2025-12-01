@@ -5,6 +5,7 @@ const store = createStore ({
         return {
             todoList: [],
             completedTodos: []
+            // completedTodoIds: []
         };
     },
     
@@ -39,9 +40,9 @@ const store = createStore ({
 
 
                 if (todo.completed) {
-                    state.completedTodoIds.push(todoId);
+                    state.completedTodos.push(todoId);
                 } else {
-                    state.completedTodoIds = state.completedTodoIds.filter(id => id !== todoId);
+                    state.completedTodos = state.completedTodos.filter(id => id !== todoId);
                 }
             }
         }
@@ -83,7 +84,7 @@ const store = createStore ({
         },
 
         getCompletedTodoIds(state) {
-            return state.completedTodoIds;
+            return state.completedTodos;
         }
     }
 })
