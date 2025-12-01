@@ -5,7 +5,6 @@ const store = createStore ({
         return {
             todoList: [],
             completedTodos: []
-            // completedTodoIds: []
         };
     },
     
