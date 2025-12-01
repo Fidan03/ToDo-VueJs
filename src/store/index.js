@@ -18,12 +18,6 @@ const store = createStore ({
 
         },
 
-        inputChange (state, payload) {
-            
-            state.inputValue = payload;
-        },
-
-
         deleteItem(state, todoId) {
             state.todoList = state.todoList.filter(todo => todo.id !== todoId)
         },
