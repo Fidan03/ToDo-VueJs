@@ -1,16 +1,48 @@
 <script>
+import { mapActions, mapGetters } from 'vuex';
 
     export default {
-        name: 'Modal',
-    props: {
-        isVisible: {
-            type: Boolean,
-            default: false
+    name: 'Modal',
+
+    props: ['todoId'],
+
+    data() {
+        return {
+            editedText: '',
+        }
+    }, 
+
+    computed: {
+        ...mapGetters(['getTodoById']),
+        currentTodo() {
+            return this.getTodoById(this.todoId);
         }
     },
+
+    watch: {
+        currentTodo: {
+            immediate: true,
+            handler(newText) {
+                if (newText) {
+                    this.editedText = newText.text;
+                }
+            }
+        }
+    },
+
     methods: {
+
+        ...mapActions[('updateTodo')],        
+
+        saveChanges() {
+            if (this.currentTodo) {
+                this.updateTodo({id: this.todoId, newText: this.editedText});
+                this.closeModal();                
+            }
+        },
+
         closeModal() {
-            this.$emit('close');
+            this.$emit('close-modal');
         }
     }
 }
@@ -21,17 +53,17 @@
 
 
 <template>
-    <div class="modalContainer" v-if="isVisible">
+    <div class="modalContainer" @click.self="closeModal">
         <div class="modal">
 
             <div class="header">
                 <h1>EDIT NOTE</h1>
-                <input type="text" v-model="this.$store.state.editingText">
+                <input type="text" v-model="editedText">
             </div>
 
             <div class="buttons">
                 <button type="button" @click="closeModal" class="cancel">CANCEL</button>
-                <button type="submit" class="modify" @click="this.$store.commit('updateTodo'); closeModal()">MODIFY</button>
+                <button type="button" @click="saveChanges" class="modify">MODIFY</button>
             </div>
         </div>
     </div>

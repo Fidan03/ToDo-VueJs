@@ -24,17 +24,22 @@ const store = createStore ({
         },
 
 
-        deleteItem(state, payload) {
-            state.todoList.splice( payload, 1);
+        deleteItem(state, todoId) {
+            state.todoList = state.todoList.filter(todo => todo.id !== todoId)
         },
 
         modalValue(state, payload) {
-            state.editingIndex = payload;
-            state.editingText = state.todoList[text][payload];
+            state.editingIndex.text = payload;
+            state.editingText.text = state.todoList[payload];
         },
 
-        updateTodo(state) {
-            state.todoList[state.editingIndex] = state.editingText;
+        updateTodo(state, {id, newText}) {
+
+            const todo = state.todoList.find(todo => todo.id === id); 
+            if (todo) {
+                todo.text = newText;
+            }
+
         }
 
     },
@@ -48,6 +53,20 @@ const store = createStore ({
             };
 
             commit('addItem', newTodo);
+        },
+
+        deleteTodo ({commit}, todoId) {
+            commit('deleteItem', todoId);
+        },
+
+        editTodo({commit}, payload) {
+            commit('updateTodo', payload);
+        }
+    },
+
+    getters: {
+        getTodoById: (state) => (id) => {
+            return state.todoList.find(todo => todo.id === id);
         }
     }
 })

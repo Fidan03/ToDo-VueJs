@@ -10,14 +10,14 @@
         </label>
 
         <span class="icons">
-          <i class="pi pi-pencil"></i>
-          <i class="pi pi-trash"></i>
+          <i class="pi pi-pencil" @click="openEditModal(todo.id)"></i>
+          <i class="pi pi-trash" @click="deleteTodo(todo.id)"></i>
         </span>
         
       </li>
     </ul>
 
-    <Modal :isVisible="showModal" @close="showModal = false" @save="saveChanges"/>
+    <Modal v-if="isModalOpen" :todoId="selectedTodoId" @close="closeEditModal"/>
 
   </div>
 </template>
@@ -28,25 +28,36 @@
 import { defineComponent } from 'vue';
 import Modal from './modal.vue';
 import store from '../store/index.js'
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default defineComponent({
   name: 'List',
+
   components: {
     Modal
   },
+
   data() {
     return {
-      showModal: false,
+      isModalOpen: false,
       store
     }
   },
+
   methods: {
-    saveChanges(newText) {
-      this.$store.state.updateTodo(this.$store.state.editingIndex, newText);
-      this.showModal = false;
+    ...mapActions(['deleteTodo']),
+
+    openEditModal (id) {
+      this.selectedTodoId = id;
+      this.isModalOpen = true;
+    },
+
+    closeEditModal() {
+      this.isModalOpen = false;
+      this.selectedTodoId = null;
     }
-  }, 
+  },
+
   computed: {
     ...mapState(['todoList'])
   }
