@@ -35,6 +35,9 @@ const store = createStore ({
             if (todo) {
                 todo.completed != todo.completed;
 
+                console.log('Todo toggled:', todo);
+
+
                 if (todo.completed) {
                     state.completedTodoIds.push(todoId);
                 } else {
@@ -67,6 +70,7 @@ const store = createStore ({
         complatedTodo ({commit}, todoId) {
             commit('toggleTodoCompletion', todoId);
         }
+
     },
 
     getters: {
