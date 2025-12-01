@@ -28,11 +28,6 @@ const store = createStore ({
             state.todoList = state.todoList.filter(todo => todo.id !== todoId)
         },
 
-        modalValue(state, payload) {
-            state.editingIndex.text = payload;
-            state.editingText.text = state.todoList[payload];
-        },
-
         updateTodo(state, {id, newText}) {
 
             const todo = state.todoList.find(todo => todo.id === id); 

@@ -1,5 +1,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 
     export default {
     name: 'Modal',
@@ -14,6 +15,7 @@ import { mapActions, mapGetters } from 'vuex';
 
     computed: {
         ...mapGetters(['getTodoById']),
+
         currentTodo() {
             return this.getTodoById(this.todoId);
         }
@@ -32,17 +34,17 @@ import { mapActions, mapGetters } from 'vuex';
 
     methods: {
 
-        ...mapActions[('updateTodo')],        
+        ...mapActions(['editTodo']),        
 
         saveChanges() {
             if (this.currentTodo) {
-                this.updateTodo({id: this.todoId, newText: this.editedText});
+                this.editTodo({id: this.todoId, newText: this.editedText});
                 this.closeModal();                
             }
         },
 
         closeModal() {
-            this.$emit('close-modal');
+            this.$emit('close');
         }
     }
 }
