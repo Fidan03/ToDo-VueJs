@@ -3,10 +3,8 @@ import {createStore} from 'vuex';
 const store = createStore ({
     state() {
         return {
-            inputValue: '',
             todoList: [],
-            editingText: '',
-            editingIndex: null
+            completedTodos: []
         };
     },
     
@@ -36,6 +34,12 @@ const store = createStore ({
             const todo = state.todoList.find(todo => todo.id === todoId);
             if (todo) {
                 todo.completed != todo.completed;
+
+                if (todo.completed) {
+                    state.completedTodoIds.push(todoId);
+                } else {
+                    state.completedTodoIds = state.completedTodoIds.filter(id => id !== todoId);
+                }
             }
         }
 
@@ -68,6 +72,14 @@ const store = createStore ({
     getters: {
         getTodoById: (state) => (id) => {
             return state.todoList.find(todo => todo.id === id);
+        },
+
+        completedTodos (state) {
+            return state.todoList.filter (todo => todo.completed);
+        },
+
+        getCompletedTodoIds(state) {
+            return state.completedTodoIds;
         }
     }
 })

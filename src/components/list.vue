@@ -33,6 +33,13 @@ import { mapState, mapActions } from 'vuex';
 export default defineComponent({
   name: 'List',
 
+  props: {
+    todo: {
+      type: Object, 
+      required: true,
+    }
+  },
+
   components: {
     Modal
   },
