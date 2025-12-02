@@ -1,8 +1,8 @@
 <template>
   <div class="todos">
-    <ul>
+    <ul v-for="todo in todoList">
 
-      <li v-for="todo in todoList" :key="todo.id">
+      <li v-if="!todo.completed" :key="todo.id">
         <label class="custom-checkbox">
           <input type="checkbox" :checked="todo.completed" @change="toggleCompletion(todo.id)"/>
           <span class="checkmark"></span>

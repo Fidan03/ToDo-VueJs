@@ -1,11 +1,17 @@
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
+import store from '../store/index.js'
 
 export default {
     name: 'Completed',
 
     computed: {
-        ...mapGetters(['completedTodos'])
+        ...mapGetters(['completedTodos']),
+        ...mapState(['todoList'])
+    },
+
+    methods: {
+        ...mapActions(['deleteTodo'])
     }
 }
 
@@ -17,8 +23,14 @@ export default {
     <div>
         <h1>COMPLETED</h1>
 
-        <ol>
-            <li v-for="todo in completedTodos" :key="todo.id">{{ todo.text }}</li>
+        <ol v-for="todo in todoList" :key="todo.id">
+            <li v-for="todo in completedTodos" :key="todo.id">
+                {{ todo.text }}
+
+                <span>
+                    <i class="pi pi-trash" @click="deleteTodo(todo.id)"></i>
+                </span>
+            </li>
         </ol>
     </div>
 </template>
@@ -37,16 +49,25 @@ div{
         margin-bottom: 20px;
     }
 
-    ol{
-        margin: 0;
-        padding: 0;
+    ol{        
+        
         display: inline-flex;
         flex-direction: column;
         align-items: start;
         gap: 10px;
+        margin: 0;
+        padding: 0;
 
         li {
             font-size: 20px;
+
+            span {
+                i {
+                    font-size: 17px;
+                    margin-left: 50px;
+                    cursor: pointer;
+                }
+            }
         }
 
     }
