@@ -3,8 +3,8 @@ import {createStore} from 'vuex';
 const store = createStore ({
     state() {
         return {
-            todoList: [],
-            completedTodos: []
+            todoList: JSON.parse(localStorage.getItem('todoList')) || [],
+            completedTodos: JSON.parse(localStorage.getItem('completedTodos')) || []
         };
     },
     
@@ -14,11 +14,13 @@ const store = createStore ({
         addItem(state, newTodo) {
 
             state.todoList.push(newTodo);
+            localStorage.setItem('todoList', JSON.stringify(state.todoList));
 
         },
 
         deleteItem(state, todoId) {
-            state.todoList = state.todoList.filter(todo => todo.id !== todoId)
+            state.todoList = state.todoList.filter(todo => todo.id !== todoId);
+            localStorage.setItem('todoList', JSON.stringify(state.todoList));
         },
 
         updateTodo(state, {id, newText}) {
@@ -26,6 +28,7 @@ const store = createStore ({
             const todo = state.todoList.find(todo => todo.id === id); 
             if (todo) {
                 todo.text = newText;
+                localStorage.setItem('todoList', JSON.stringify(state.todoList));
             }
 
         },
@@ -43,6 +46,8 @@ const store = createStore ({
                 } else {
                     state.completedTodos = state.completedTodos.filter(id => id !== todoId);
                 }
+
+                localStorage.setItem('todoList', JSON.stringify(state.todoList));
             }
         }
 
