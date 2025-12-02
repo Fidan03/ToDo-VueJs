@@ -1,17 +1,22 @@
 <script>
 import List from '../components/list.vue';
 import store from '../store/index.js'
-
 import { mapState, mapActions } from 'vuex';
 
-
+import { Dropdown, Menu, MenuItem } from 'ant-design-vue';
+import { DownOutlined } from '@ant-design/icons-vue';
 
 export default {
   name: 'Home',
+
   components: {
-    List
+    List,
+    ADropdown: Dropdown,
+    AMenu: Menu,
+    AMenuItem: MenuItem,
+    DownOutlined
   },
-  
+
   data () {
     return {
       newTodoText: ''
@@ -30,14 +35,10 @@ export default {
         this.addTodo({ text: this.newTodoText });
         this.newTodoText = '';
       }
-
-
     }
   }
 }
-
 </script>
-
 
 
 <template>
@@ -46,25 +47,43 @@ export default {
 
     <div class="inputField">
 
-
       <div class="input">
         <input type="text" placeholder="Search note ..." v-model="newTodoText"/>
-
-        <p>
-          <i class="pi pi-search"></i>
-        </p>
+        <p><i class="pi pi-search"></i></p>
       </div>
 
       <div class="buttons">
+
         <div class="filterBtn">
-          <p>ALL</p>
+          <a-dropdown trigger="click">
+            <a class="ant-dropdown-link">
+              Filter <DownOutlined />
+            </a>
+
+            <template #overlay>
+              <a-menu>
+                <a-menu-item>
+                  <a>All</a>
+                </a-menu-item>
+
+                <a-menu-item>
+                  <a>Completed</a>
+                </a-menu-item>
+
+                <a-menu-item>
+                  <a>Uncompleted</a>
+                </a-menu-item>
+              </a-menu>
+            </template>
+
+          </a-dropdown>
         </div>
 
         <button>
           <i class="pi pi-moon"></i>
         </button>
-      </div>
 
+      </div>
     </div>
 
     <List/>
@@ -73,7 +92,6 @@ export default {
 
   </div>
 </template>
-
 
 
 
@@ -158,8 +176,6 @@ export default {
     }
   }
 
-
-
   .add {
     position: fixed;
     bottom: 30px;
@@ -185,5 +201,4 @@ export default {
     }
   }
 }
-
 </style>
