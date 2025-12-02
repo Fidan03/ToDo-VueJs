@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ant-design-vue": "^4.0.0-rc.6",
+    "ant-design-vue": "^4.2.6",
     "antd": "^6.0.0",
     "primeicons": "^7.0.0",
     "vue": "^3.5.24",
